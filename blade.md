@@ -715,32 +715,26 @@ You should define all of the component's data attributes in its class constructo
 
     namespace App\View\Components;
 
+    use Closure;
+    use Illuminate\Contracts\View\View;
     use Illuminate\View\Component;
 
     class Alert extends Component
     {
         /**
          * The alert type.
-         *
-         * @var string
          */
-        public $type;
+        public string $type;
 
         /**
          * The alert message.
-         *
-         * @var string
          */
-        public $message;
+        public string $message;
 
         /**
          * Create the component instance.
-         *
-         * @param  string  $type
-         * @param  string  $message
-         * @return void
          */
-        public function __construct($type, $message)
+        public function __construct(string $type, string $message)
         {
             $this->type = $type;
             $this->message = $message;
@@ -748,10 +742,8 @@ You should define all of the component's data attributes in its class constructo
 
         /**
          * Get the view / contents that represent the component.
-         *
-         * @return \Illuminate\View\View|\Closure|string
          */
-        public function render()
+        public function render(): View|Closure|string
         {
             return view('components.alert');
         }
@@ -850,10 +842,8 @@ Blade components also allow you to access the component name, attributes, and sl
 
     /**
      * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\View\View|\Closure|string
      */
-    public function render()
+    public function render(): View|Closure|string
     {
         return function (array $data) {
             // $data['componentName'];
@@ -1188,7 +1178,7 @@ For very small components, it may feel cumbersome to manage both the component c
     /**
      * Get the view / contents that represent the component.
      *
-     * @return \Illuminate\View\View|\Closure|string
+     * @return View|Closure|string
      */
     public function render()
     {
