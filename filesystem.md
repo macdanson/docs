@@ -282,10 +282,8 @@ If you need to customize how temporary URLs are created for a specific storage d
     {
         /**
          * Bootstrap any application services.
-         *
-         * @return void
          */
-        public function boot()
+        public function boot(): void
         {
             Storage::disk('local')->buildTemporaryUrlsUsing(function ($path, $expiration, $options) {
                 return URL::temporarySignedRoute(
@@ -612,20 +610,16 @@ Next, you can register the driver within the `boot` method of one of your applic
     {
         /**
          * Register any application services.
-         *
-         * @return void
          */
-        public function register()
+        public function register(): void
         {
             //
         }
 
         /**
          * Bootstrap any application services.
-         *
-         * @return void
          */
-        public function boot()
+        public function boot(): void
         {
             Storage::extend('dropbox', function ($app, $config) {
                 $adapter = new DropboxAdapter(new DropboxClient(

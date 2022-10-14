@@ -249,10 +249,8 @@ If you would like a route parameter to always be constrained by a given regular 
 
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Route::pattern('id', '[0-9]+');
     }
@@ -578,10 +576,8 @@ You are not required to use Laravel's implicit, convention based model resolutio
 
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Route::model('user', User::class);
 
@@ -610,10 +606,8 @@ If you wish to define your own model binding resolution logic, you may use the `
 
     /**
      * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Route::bind('user', function ($value) {
             return User::where('name', $value)->firstOrFail();

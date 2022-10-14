@@ -643,10 +643,8 @@ Once you have written your custom engine, you may register it with Scout using t
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         resolve(EngineManager::class)->extend('mysql', function () {
             return new MySqlSearchEngine;
@@ -668,10 +666,8 @@ If you would like to define a custom Scout search builder method, you may use th
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         Builder::macro('count', function () {
             return $this->engine()->getTotalCount(

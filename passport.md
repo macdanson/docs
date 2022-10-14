@@ -134,10 +134,8 @@ If necessary, you may define the path where Passport's keys should be loaded fro
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
@@ -200,10 +198,8 @@ By default, Passport issues long-lived access tokens that expire after one year.
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
@@ -236,10 +232,8 @@ After defining your model, you may instruct Passport to use your custom model vi
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
@@ -763,10 +757,8 @@ The implicit grant is similar to the authorization code grant; however, the toke
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
@@ -1006,10 +998,8 @@ You may define your API's scopes using the `Passport::tokensCan` method in the `
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
@@ -1151,10 +1141,8 @@ If needed, you can customize the `laravel_token` cookie's name using the `Passpo
 
     /**
      * Register any authentication / authorization services.
-     *
-     * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         $this->registerPolicies();
 
