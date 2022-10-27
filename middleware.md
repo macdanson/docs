@@ -71,7 +71,6 @@ Of course, a middleware can perform tasks before or after passing the request de
 
     use Closure;
     use Illuminate\Http\Request;
-    use Symfony\Component\HttpFoundation\Response;
 
     class BeforeMiddleware
     {
@@ -258,7 +257,6 @@ Additional middleware parameters will be passed to the middleware after the `$ne
 
     use Closure;
     use Illuminate\Http\Request;
-    use Symfony\Component\HttpFoundation\Response;
 
     class EnsureUserHasRole
     {
@@ -295,7 +293,6 @@ Sometimes a middleware may need to do some work after the HTTP response has been
 
     use Closure;
     use Illuminate\Http\Request;
-    use Symfony\Component\HttpFoundation\Response;
 
     class TerminatingMiddleware
     {
