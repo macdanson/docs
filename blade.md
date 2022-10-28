@@ -711,21 +711,24 @@ You should define all of the component's data attributes in its class constructo
 
     namespace App\View\Components;
 
-    use Closure;
-    use Illuminate\Contracts\View\View;
     use Illuminate\View\Component;
+    use Illuminate\View\View;
 
     class Alert extends Component
     {
         /**
          * The alert type.
+         *
+         * @var string
          */
-        public string $type;
+        public $type;
 
         /**
          * The alert message.
+         *
+         * @var string
          */
-        public string $message;
+        public $message;
 
         /**
          * Create the component instance.
@@ -739,7 +742,7 @@ You should define all of the component's data attributes in its class constructo
         /**
          * Get the view / contents that represent the component.
          */
-        public function render(): View|Closure|string
+        public function render(): View
         {
             return view('components.alert');
         }
@@ -830,10 +833,12 @@ You may execute this method from your component template by invoking the variabl
 
 Blade components also allow you to access the component name, attributes, and slot inside the class's render method. However, in order to access this data, you should return a closure from your component's `render` method. The closure will receive a `$data` array as its only argument. This array will contain several elements that provide information about the component:
 
+    use Closure;
+
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): View|Closure|string
+    public function render(): Closure
     {
         return function (array $data) {
             // $data['componentName'];
@@ -1163,7 +1168,7 @@ For very small components, it may feel cumbersome to manage both the component c
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): View|Closure|string
+    public function render(): string
     {
         return <<<'blade'
             <div class="alert alert-danger">
