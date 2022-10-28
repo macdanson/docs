@@ -1682,7 +1682,7 @@ The following example creates a `@datetime($var)` directive which formats a give
          */
         public function register(): void
         {
-            //
+            // ...
         }
 
         /**

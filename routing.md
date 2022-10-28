@@ -735,11 +735,11 @@ Rate limiters may be attached to routes or route groups using the `throttle` [mi
 
     Route::middleware(['throttle:uploads'])->group(function () {
         Route::post('/audio', function () {
-            //
+            // ...
         });
 
         Route::post('/video', function () {
-            //
+            // ...
         });
     });
 
