@@ -80,7 +80,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 protected function address(): Attribute
 {
     return Attribute::make(
-        get: fn ($value, $attributes) => new Address(
+        get: fn (mixed $value, array $attributes) => new Address(
             $attributes['address_line_one'],
             $attributes['address_line_two'],
         ),
@@ -122,7 +122,7 @@ If you would like to disable the object caching behavior of attributes, you may 
 protected function address(): Attribute
 {
     return Attribute::make(
-        get: fn ($value, $attributes) => new Address(
+        get: fn (mixed $value, array $attributes) => new Address(
             $attributes['address_line_one'],
             $attributes['address_line_two'],
         ),
@@ -181,7 +181,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 protected function address(): Attribute
 {
     return Attribute::make(
-        get: fn ($value, $attributes) => new Address(
+        get: fn (mixed $value, array $attributes) => new Address(
             $attributes['address_line_one'],
             $attributes['address_line_two'],
         ),
@@ -490,6 +490,9 @@ Classes that implement this interface must define a `get` and `set` method. The 
     {
         /**
          * Cast the given value.
+         *
+         * @param  array<string, mixed>  $attributes
+         * @return array<string, mixed>
          */
         public function get(Model $model, string $key, mixed $value, array $attributes): array
         {
@@ -498,6 +501,8 @@ Classes that implement this interface must define a `get` and `set` method. The 
 
         /**
          * Prepare the given value for storage.
+         *
+         * @param  array<string, mixed>  $attributes
          */
         public function set(Model $model, string $key, mixed $value, array $attributes): string
         {
@@ -546,6 +551,8 @@ As an example, we will define a custom cast class that casts multiple model valu
     {
         /**
          * Cast the given value.
+         *
+         * @param  array<string, mixed>  $attributes
          */
         public function get(Model $model, string $key, mixed $value, array $attributes): AddressValueObject
         {
@@ -557,6 +564,9 @@ As an example, we will define a custom cast class that casts multiple model valu
 
         /**
          * Prepare the given value for storage.
+         *
+         * @param  array<string, mixed>  $attributes
+         * @return array<string, string>
          */
         public function set(Model $model, string $key, mixed $value, array $attributes): array
         {
@@ -630,6 +640,8 @@ Occasionally, you may need to write a custom cast that only transforms values th
 
         /**
          * Prepare the given value for storage.
+         *
+         * @param  array<string, mixed>  $attributes
          */
         public function set(Model $model, string $key, mixed $value, array $attributes): string
         {
