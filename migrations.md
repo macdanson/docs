@@ -119,7 +119,7 @@ If your migration will be interacting with a database connection other than your
      */
     public function up(): void
     {
-        //
+        // ...
     }
 
 <a name="running-migrations"></a>
