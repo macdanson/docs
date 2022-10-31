@@ -124,7 +124,7 @@ The `via` method receives a `$notifiable` instance, which will be an instance of
      *
      * @return array<int, string>
      */
-    public function via(mixed $notifiable): array
+    public function via(object $notifiable): array
     {
         return $notifiable->prefers_sms ? ['vonage'] : ['mail', 'database'];
     }
@@ -184,7 +184,7 @@ Alternatively, you may define a `withDelay` method on the notification class its
      *
      * @return array<string, \Illuminate\Support\Carbon>
      */
-    public function withDelay(mixed $notifiable): array
+    public function withDelay(object $notifiable): array
     {
         return [
             'mail' => now()->addMinutes(5),
@@ -269,7 +269,7 @@ However, if you would like to make the final determination on whether the queued
     /**
      * Determine if the notification should be sent.
      */
-    public function shouldSend(mixed $notifiable, string $channel): bool
+    public function shouldSend(object $notifiable, string $channel): bool
     {
         return $this->invoice->isPaid();
     }
@@ -306,7 +306,7 @@ The `MailMessage` class contains a few simple methods to help you build transact
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         $url = url('/invoice/'.$this->invoice->id);
 
@@ -336,7 +336,7 @@ Some notifications inform users of errors, such as a failed invoice payment. You
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->error()
@@ -352,7 +352,7 @@ Instead of defining the "lines" of text in the notification class, you may use t
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)->view(
             'emails.name', ['invoice' => $this->invoice]
@@ -364,7 +364,7 @@ You may specify a plain-text view for the mail message by passing the view name 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)->view(
             ['emails.name.html', 'emails.name.plain'],
@@ -380,7 +380,7 @@ By default, the email's sender / from address is defined in the `config/mail.php
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->from('barrett@example.com', 'Barrett Blair')
@@ -427,7 +427,7 @@ By default, the email's subject is the class name of the notification formatted 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->subject('Notification Subject')
@@ -442,7 +442,7 @@ By default, the email notification will be sent using the default mailer defined
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->mailer('postmark')
@@ -466,7 +466,7 @@ To add attachments to an email notification, use the `attach` method while build
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->greeting('Hello!')
@@ -481,7 +481,7 @@ When attaching files to a message, you may also specify the display name and / o
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->greeting('Hello!')
@@ -498,7 +498,7 @@ Unlike attaching files in mailable objects, you may not attach a file directly f
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): Mailable
+    public function toMail(object $notifiable): Mailable
     {
         return (new InvoicePaidMailable($this->invoice))
                     ->to($notifiable->email)
@@ -510,7 +510,7 @@ When necessary, multiple files may be attached to a message using the `attachMan
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->greeting('Hello!')
@@ -531,7 +531,7 @@ The `attachData` method may be used to attach a raw string of bytes as an attach
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->greeting('Hello!')
@@ -548,7 +548,7 @@ Some third-party email providers such as Mailgun and Postmark support message "t
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->greeting('Comment Upvoted!')
@@ -570,7 +570,7 @@ The `withSymfonyMessage` method of the `MailMessage` class allows you to registe
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->withSymfonyMessage(function (Email $message) {
@@ -591,7 +591,7 @@ If needed, you may return a full [mailable object](/docs/{{version}}/mail) from 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): Mailable
+    public function toMail(object $notifiable): Mailable
     {
         return (new InvoicePaidMailable($this->invoice))
                     ->to($notifiable->email);
@@ -609,7 +609,7 @@ If you are sending an [on-demand notification](#on-demand-notifications), the `$
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): Mailable
+    public function toMail(object $notifiable): Mailable
     {
         $address = $notifiable instanceof AnonymousNotifiable
                 ? $notifiable->routeNotificationFor('mail')
@@ -653,7 +653,7 @@ Like all other mail notifications, notifications that use Markdown templates sho
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         $url = url('/invoice/'.$this->invoice->id);
 
@@ -741,7 +741,7 @@ To customize the theme for an individual notification, you may call the `theme` 
     /**
      * Get the mail representation of the notification.
      */
-    public function toMail(mixed $notifiable): MailMessage
+    public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
                     ->theme('invoice')
@@ -775,7 +775,7 @@ If a notification supports being stored in a database table, you should define a
      *
      * @return array<string, mixed>
      */
-    public function toArray(mixed $notifiable): array
+    public function toArray(object $notifiable): array
     {
         return [
             'invoice_id' => $this->invoice->id,
@@ -853,7 +853,7 @@ The `broadcast` channel broadcasts notifications using Laravel's [event broadcas
     /**
      * Get the broadcastable representation of the notification.
      */
-    public function toBroadcast(mixed $notifiable): BroadcastMessage
+    public function toBroadcast(object $notifiable): BroadcastMessage
     {
         return new BroadcastMessage([
             'invoice_id' => $this->invoice->id,
@@ -945,7 +945,7 @@ If a notification supports being sent as an SMS, you should define a `toVonage` 
     /**
      * Get the Vonage / SMS representation of the notification.
      */
-    public function toVonage(mixed $notifiable): VonageMessage
+    public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
                     ->content('Your SMS message content');
@@ -961,7 +961,7 @@ If your SMS message will contain unicode characters, you should call the `unicod
     /**
      * Get the Vonage / SMS representation of the notification.
      */
-    public function toVonage(mixed $notifiable): VonageMessage
+    public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
                     ->content('Your unicode message')
@@ -978,7 +978,7 @@ If you would like to send some notifications from a phone number that is differe
     /**
      * Get the Vonage / SMS representation of the notification.
      */
-    public function toVonage(mixed $notifiable): VonageMessage
+    public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
                     ->content('Your SMS message content')
@@ -995,7 +995,7 @@ If you would like to keep track of costs per user, team, or client, you may add 
     /**
      * Get the Vonage / SMS representation of the notification.
      */
-    public function toVonage(mixed $notifiable): VonageMessage
+    public function toVonage(object $notifiable): VonageMessage
     {
         return (new VonageMessage)
                     ->clientReference((string) $notifiable->id)
@@ -1052,7 +1052,7 @@ If a notification supports being sent as a Slack message, you should define a `t
     /**
      * Get the Slack representation of the notification.
      */
-    public function toSlack(mixed $notifiable): SlackMessage
+    public function toSlack(object $notifiable): SlackMessage
     {
         return (new SlackMessage)
                     ->content('One of your invoices has been paid!');
@@ -1069,7 +1069,7 @@ You may also add "attachments" to Slack messages. Attachments provide richer for
     /**
      * Get the Slack representation of the notification.
      */
-    public function toSlack(mixed $notifiable): SlackMessage
+    public function toSlack(object $notifiable): SlackMessage
     {
         $url = url('/exceptions/'.$this->exception->id);
 
@@ -1090,7 +1090,7 @@ Attachments also allow you to specify an array of data that should be presented 
     /**
      * Get the Slack representation of the notification.
      */
-    public function toSlack(mixed $notifiable): SlackMessage
+    public function toSlack(object $notifiable): SlackMessage
     {
         $url = url('/invoices/'.$this->invoice->id);
 
@@ -1119,7 +1119,7 @@ If some of your attachment fields contain Markdown, you may use the `markdown` m
     /**
      * Get the Slack representation of the notification.
      */
-    public function toSlack(mixed $notifiable): SlackMessage
+    public function toSlack(object $notifiable): SlackMessage
     {
         $url = url('/exceptions/'.$this->exception->id);
 
@@ -1295,7 +1295,7 @@ Within the `send` method, you may call methods on the notification to retrieve a
         /**
          * Send the given notification.
          */
-        public function send(mixed $notifiable, Notification $notification): void
+        public function send(object $notifiable, Notification $notification): void
         {
             $message = $notification->toVoice($notifiable);
 
@@ -1322,7 +1322,7 @@ Once your notification channel class has been defined, you may return the class 
         /**
          * Get the notification channels.
          */
-        public function via(mixed $notifiable): string
+        public function via(object $notifiable): string
         {
             return VoiceChannel::class;
         }
@@ -1330,7 +1330,7 @@ Once your notification channel class has been defined, you may return the class 
         /**
          * Get the voice representation of the notification.
          */
-        public function toVoice(mixed $notifiable): VoiceMessage
+        public function toVoice(object $notifiable): VoiceMessage
         {
             // ...
         }
