@@ -757,7 +757,7 @@ To send a message, use the `to` method on the `Mail` [facade](/docs/{{version}}/
 
             Mail::to($request->user())->send(new OrderShipped($order));
 
-            return response(status: 201);
+            return response()->noContent();
         }
     }
 
